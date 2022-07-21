@@ -1,0 +1,16 @@
+:root {
+  --purplack: #190b2c;
+  --purplack-lighten: #7d6f90;
+  --redrange: #ff5c00;
+  --redrange-lighten: #ffc064;
+  --redrange-darken: #cd2a00;
+  --lemon: #ffd800;
+  --lemon-lighten: #ffff64;
+  --lemon-darken: #e1ba00;
+  --lime: #59f89c;
+  --lime-lighten: #8bffce;
+  --lime-darken: #27c66a;
+  --gray: #dbdbdb;
+  --light-gray: #efefef;
+  --dark-gray: #bdbdbd;
+}
