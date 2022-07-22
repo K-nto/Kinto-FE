@@ -15,13 +15,19 @@ const TitleBar = () => {
       </div>
       <div className="content">
         <Searchbar />
-        <div>
+        <div className="buttons">
           <IconOnlyButton
             icon="fi-br-settings-sliders"
-            style="tertiary"
-            size="48px"
+            style="secondary"
+            buttonSize="48px"
+            iconSize="24px"
           />
-          <IconOnlyButton icon="fi-br-id-badge" style="tertiary" size="48px" />
+          <IconOnlyButton
+            icon="fi-br-id-badge"
+            style="secondary"
+            buttonSize="48px"
+            iconSize="24px"
+          />
         </div>
       </div>
     </div>
