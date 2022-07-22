@@ -6,7 +6,7 @@ import Files from "./Files/Files";
 import Nodes from "./Nodes/Nodes";
 import TitleBar from "./TitleBar/TitleBar";
 import SideBar from "./SideBar/SideBar";
-
+import "./../public/index.css";
 const App = () => {
   const user = useState({ user: "guest" });
   const section = useState("files");

@@ -1,0 +1,34 @@
+.searchBar {
+  position: relative;
+}
+input {
+  padding: 0px 20px;
+  height: 48px;
+  width: 720px;
+  border: none;
+  border: 1px var(--light-gray) solid;
+  border-radius: 32px;
+}
+
+input:focus-visible {
+  border: 1px var(--redrange) solid;
+}
+
+button {
+  position: absolute;
+  right: 24px;
+  font-size: 24px;
+  top: 10px;
+  border: none;
+  background: none;
+  color: var(--light-gray);
+}
+
+button:hover {
+  color: var(--redrange);
+  cursor: pointer;
+}
+
+button:active {
+  color: var(--redrange-darken);
+}

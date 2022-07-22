@@ -2,17 +2,24 @@
 .titleBar {
   display: flex;
   height: 64px;
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 2px solid var(--light-gray);
 }
 
 .logo {
   display: flex;
   justify-content: center;
-  align-content: center;
-  width: 256px;
+  min-width: 256px;
   padding-top: 8px;
 }
 
 .logo img {
   margin-left: -16px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
 }
