@@ -1,8 +1,20 @@
 @import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
+@import "/src/common/colors.css";
 
 body,
 html {
   font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+p,
+span {
+  color: var(--purplack);
 }
 
 h1 {
@@ -55,4 +67,13 @@ p {
 
 input:focus-visible {
   outline: none;
+}
+
+a {
+  color: black;
+}
+a:link,
+a:visited {
+  color: black;
+  text-decoration: none;
 }

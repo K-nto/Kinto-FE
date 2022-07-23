@@ -1,0 +1,12 @@
+@import "/src/common/colors.css";
+
+.sidebar {
+  width: 256px;
+  height: 100%;
+  border-right: 1px var(--redrange-lighten) solid;
+}
+.sidebar > Button {
+  margin: 16px 32px;
+  width: calc(100% - 64px);
+  height: 56px;
+}

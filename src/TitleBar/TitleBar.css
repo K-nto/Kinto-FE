@@ -3,6 +3,7 @@
   display: flex;
   height: 64px;
   border-bottom: 2px solid var(--light-gray);
+  box-sizing: border-box;
 }
 
 .titleBar .logo {

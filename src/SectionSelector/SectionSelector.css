@@ -1,0 +1,25 @@
+@import "/src/common/colors.css";
+
+.sectionSelector {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sectionSelector a {
+  width: 100%;
+  height: 56px;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 1px var(--redrange-lighten) solid;
+}
+.sectionSelector a.active {
+  background-color: var(--redrange-lighten);
+}
+
+.sectionSelector a h3 {
+  margin: 0;
+}
