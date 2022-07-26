@@ -1,0 +1,18 @@
+@import "/src/common/colors.css";
+
+.newNodeCard {
+  display: flex;
+  height: 283px;
+  width: 666px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.newNodeCard i {
+  font-size: 64px;
+  color: var(--redrange);
+}
+.newNodeCard span {
+  color: var(--dark-gray);
+  padding-top: 8px;
+}

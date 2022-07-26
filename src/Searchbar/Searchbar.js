@@ -4,7 +4,7 @@ const Searchbar = () => (
   <div className="searchBar">
     <input placeholder="Buscar..."></input>
     <button>
-      <i class="fi fi-br-search"></i>{" "}
+      <i className="fi fi-br-search"></i>{" "}
     </button>
   </div>
 );

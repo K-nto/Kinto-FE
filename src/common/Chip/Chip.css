@@ -1,0 +1,7 @@
+@import "/src/common/colors.css";
+
+span.chip {
+  color: var(--white);
+  padding: 2px 16px 3px;
+  border-radius: 32px;
+}

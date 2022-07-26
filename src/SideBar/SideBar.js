@@ -13,7 +13,7 @@ const SideBar = () => {
       />
       <SectionSelector
         sections={[
-          { value: "files", route: "/files", label: "Mis archivos" },
+          { value: "files", route: "/files", label: "Mi unidad" },
           { value: "nodes", route: "/nodes", label: "Mis nodos" },
         ]}
       />

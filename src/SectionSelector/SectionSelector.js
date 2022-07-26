@@ -12,7 +12,7 @@ const SectionSelector = (props) => {
       {sections.map((section) => (
         <Link
           key={section.value}
-          className={`section ${
+          className={`sectionTab ${
             section.value === activeSection ? "active" : ""
           }`}
           to={section.route}

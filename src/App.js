@@ -12,7 +12,7 @@ const App = () => {
   const user = useState({ user: "guest" });
   const section = useState("files");
   return (
-    <div class="app">
+    <div className="app">
       <UserContext.Provider value={user}>
         <SectionContext.Provider value={section}>
           <BrowserRouter>

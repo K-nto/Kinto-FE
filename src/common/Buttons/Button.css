@@ -3,16 +3,20 @@
 button.primary {
   background-color: var(--redrange);
   color: var(--white);
+  border: 4px var(--redrange) solid;
 }
-button.primary i {
+button.primary i,
+button.primary h5 {
   color: var(--white);
 }
+
 button.primary:hover {
   background-color: var(--white);
   color: var(--redrange);
   border: 4px var(--redrange) solid;
 }
-button.primary:hover i {
+button.primary:hover i,
+button.primary:hover h5 {
   color: var(--redrange);
 }
 button.primary:active {
@@ -61,7 +65,7 @@ button {
   min-height: 32px;
   border: none;
   outline: none;
-  padding-top: 4px;
+  padding: 0px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
