@@ -1,3 +1,4 @@
+import "./Button.css";
 import { useEffect, useState } from "react";
 
 const Button = (props) => {

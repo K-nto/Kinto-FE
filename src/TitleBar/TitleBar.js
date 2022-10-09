@@ -2,7 +2,6 @@ import { UserContext } from "../ContextProviders";
 import { Link } from "react-router-dom";
 import kintoLogo from "../../public/Kinto.png";
 import "./TitleBar.css";
-import IconOnlyButton from "../common/Buttons/IconOnlyButton/IconOnlyButton";
 import Searchbar from "../Searchbar/Searchbar";
 import Button from "../common/Buttons/Button";
 
