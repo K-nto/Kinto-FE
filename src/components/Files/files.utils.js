@@ -1,12 +1,12 @@
 import axios from "axios";
 import { KINTO_SERVICE_URL, USERS_ROUTE, FILES_ROUTE } from "../../config";
 
-export function sortFiles(files) {
-  return files.sort((a, b) => a.name.localeCompare(b.name));
+export function sortByName(a, b) {
+  return a.name.localeCompare(b.name);
 }
 
 function getFileExtension(name) {
-  return name.slice(name.indexOf("."));
+  return name.slice(name.lastIndexOf(".")).toLocaleLowerCase();
 }
 export function getFileType(file) {
   switch (getFileExtension(file.name)) {
@@ -34,6 +34,7 @@ export function getFileType(file) {
 }
 
 export function filterFoldersFromFiles(rawFiles) {
+  // @TODO: DELETE-  Unnecesary with redux
   const filteredFolders = [];
   const filteredFiles = [];
 
@@ -43,7 +44,6 @@ export function filterFoldersFromFiles(rawFiles) {
       ? filteredFolders.push(element)
       : filteredFiles.push({ ...element, type: getFileType(element) });
   });
-  console.log(filteredFiles);
   return { filteredFolders, filteredFiles };
 }
 
@@ -66,7 +66,9 @@ export async function uploadFiles(currentUser, fileList) {
       }
     )
     .then((res) => {
-      return res;
+      return res.data.map((file) =>
+        file.type === "directory" ? file : { ...file, type: getFileType(file) }
+      );
     })
     .catch((e) => console.log(e));
 }

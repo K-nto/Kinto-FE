@@ -1,11 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { KINTO_SERVICE_URL, USERS_ROUTE, FILES_ROUTE } from "./../../config";
-import { filterFoldersFromFiles, sortFiles } from "./files.utils";
+import { getFileType } from "./files.utils";
 import File from "../File/File";
 import Folder from "../Folder/Folder";
 import "../common/Section.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/user.selector";
+import {
+  selectFileList,
+  selectFileStatus,
+  selectFolderList,
+} from "../../store/files/files.selector";
+import {
+  SET_FILES_LIST,
+  SET_FILES_LOADED,
+  SET_FILES_LOADING,
+} from "../../store/files/files.actions";
 
 const Files = () => {
   // we'll get one array (or tree?) of files and folders
@@ -15,9 +25,11 @@ const Files = () => {
   // an effect linked to the "whole data" property that filters folders and files separately
   // if file set type according to file name / extension from data. Will probably have to include mimetype somewhere
   const currentUser = useSelector(selectUser);
-  const [fileList, setFileList] = useState([]);
-  const [folderList, setFolderList] = useState([]);
-  const [status, setStatus] = useState("unloaded");
+  const fileList = useSelector(selectFileList);
+  const folderList = useSelector(selectFolderList);
+  const status = useSelector(selectFileStatus);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     requestFileList();
@@ -25,20 +37,24 @@ const Files = () => {
 
   // @TODO: userId! not name
   async function requestFileList() {
-    setStatus("loading");
+    dispatch({ type: SET_FILES_LOADING });
     const res = await fetch(
       `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.name}/${FILES_ROUTE}`
     );
 
     const rawFiles = await res.json();
 
-    const { filteredFolders, filteredFiles } = filterFoldersFromFiles(
-      sortFiles(rawFiles)
-    );
-
-    setFolderList(filteredFolders);
-    setFileList(filteredFiles);
-    setStatus("loaded");
+    dispatch({
+      type: SET_FILES_LIST,
+      payload: {
+        dirList: rawFiles.map((file) =>
+          file.type === "directory"
+            ? file
+            : { ...file, type: getFileType(file) }
+        ),
+      },
+    });
+    dispatch({ type: SET_FILES_LOADED });
   }
 
   return (
