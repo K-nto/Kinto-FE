@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { KINTO_SERVICE_URL, USERS_ROUTE, FILES_ROUTE } from "./../../config";
-import { UserContext } from "../../ContextProviders";
 import { filterFoldersFromFiles, sortFiles } from "./files.utils";
 import File from "../File/File";
 import Folder from "../Folder/Folder";
 import "../common/Section.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/user.selector";
 
 const Files = () => {
   // we'll get one array (or tree?) of files and folders
@@ -13,7 +14,7 @@ const Files = () => {
   // an Effect linked to the user and the selected folder to request new files and cache them
   // an effect linked to the "whole data" property that filters folders and files separately
   // if file set type according to file name / extension from data. Will probably have to include mimetype somewhere
-  const [currentUser, setCurrentUser] = useContext(UserContext);
+  const currentUser = useSelector(selectUser);
   const [fileList, setFileList] = useState([]);
   const [folderList, setFolderList] = useState([]);
   const [status, setStatus] = useState("unloaded");

@@ -1,11 +1,13 @@
-import { UserContext } from "../../ContextProviders";
 import { Link } from "react-router-dom";
 import kintoLogo from "../../../public/Kinto.png";
 import "./TitleBar.css";
 import Searchbar from "../Searchbar/Searchbar";
 import Button from "../common/Buttons/Button";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/user.selector";
 
 const TitleBar = () => {
+  const currentUser = useSelector(selectUser);
   return (
     <div className="titleBar">
       <div className="logo">
@@ -36,12 +38,4 @@ const TitleBar = () => {
   );
 };
 
-const WrappedTitleBar = () => {
-  return (
-    <UserContext.Consumer>
-      {(user) => <TitleBar user={user} />}
-    </UserContext.Consumer>
-  );
-};
-
-export default WrappedTitleBar;
+export default TitleBar;

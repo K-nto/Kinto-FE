@@ -2,11 +2,11 @@ import FileInput from "../common/FileInput/FileInput";
 import SectionSelector from "../SectionSelector/SectionSelector";
 import { uploadFiles } from "../Files/files.utils";
 import "./SideBar.css";
-import { useContext } from "react";
-import { UserContext } from "../../ContextProviders";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/user.selector";
 
 const SideBar = () => {
-  const [currentUser, setCurrentUser] = useContext(UserContext);
+  const currentUser = useSelector(selectUser);
   async function handleUploadFiles(e) {
     const result = await uploadFiles(currentUser, e.target.files);
 

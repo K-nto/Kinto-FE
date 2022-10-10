@@ -1,10 +1,10 @@
-import { SET_LOADING, SET_FILES, SET_DIRECTORY } from "./files.actions";
+import { SET_FILES_LOADING, SET_FILES, SET_DIRECTORY } from "./files.actions";
 
 const initialState = {
   dirname: "/",
   fileList: [],
   folderList: [],
-  status: "unloaded",
+  fileStatus: "unloaded",
 };
 export function filesReducer(state = initialState, action) {
   switch (action.type) {
@@ -13,14 +13,14 @@ export function filesReducer(state = initialState, action) {
         ...state,
         fileList: action.payload.fileList,
         folderList: action.payload.folderList,
-        status: "loaded",
+        fileStatus: "loaded",
       };
-    case SET_LOADING:
+    case SET_FILES_LOADING:
       return {
         ...state,
         fileList: [],
         folderList: [],
-        status: "loading",
+        fileStatus: "loading",
       };
     case SET_DIRECTORY:
       return {
@@ -28,7 +28,7 @@ export function filesReducer(state = initialState, action) {
         dirname: action.payload.dirname,
         fileList: [],
         folderList: [],
-        status: "loading",
+        fileStatus: "loading",
       };
     default:
       return { ...state };
