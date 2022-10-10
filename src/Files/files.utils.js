@@ -1,3 +1,7 @@
+import axios from "axios";
+import post from "axios";
+import { KINTO_SERVICE_URL, USERS_ROUTE, FILES_ROUTE } from "../config";
+
 export function sortFiles(files) {
   return files.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -42,4 +46,28 @@ export function filterFoldersFromFiles(rawFiles) {
   });
   console.log(filteredFiles);
   return { filteredFolders, filteredFiles };
+}
+
+export async function uploadFiles(currentUser, fileList) {
+  const formData = new FormData();
+  if (fileList.length > 1) return "Only one file at a time!";
+  formData.append("file", fileList[0]);
+  return await axios
+    .post(
+      `${KINTO_SERVICE_URL}/${USERS_ROUTE}/guest/${FILES_ROUTE}`,
+      formData,
+      {
+        onUploadProgress: (ProgressEvent) => {
+          let progress =
+            Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
+            "%";
+          console.log(progress);
+          // setProgess(progress);
+        },
+      }
+    )
+    .then((res) => {
+      return res;
+    })
+    .catch((e) => console.log(e));
 }

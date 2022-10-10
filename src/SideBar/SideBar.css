@@ -5,8 +5,7 @@
   height: 100%;
   border-right: 1px var(--redrange-lighten) solid;
 }
-.sidebar > Button {
+.sidebar .custom-file-upload {
   margin: 16px 32px;
-  width: calc(100% - 64px);
-  height: 56px;
+  height: 48px;
 }
