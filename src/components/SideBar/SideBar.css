@@ -1,0 +1,11 @@
+@import "/src/components/common/colors.css";
+
+.sidebar {
+  min-width: 256px;
+  height: 100%;
+  border-right: 1px var(--redrange-lighten) solid;
+}
+.sidebar .custom-file-upload {
+  margin: 16px 32px;
+  height: 48px;
+}

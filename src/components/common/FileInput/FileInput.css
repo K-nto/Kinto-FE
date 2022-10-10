@@ -1,0 +1,37 @@
+@import "/src/components/common/colors.css";
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    background-color: var(--white);
+    color: var(--redrange);
+    border: 4px var(--light-gray) solid;
+    border-radius: 32px;
+    min-height: 32px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-file-upload:hover {
+    border: 4px var(--redrange) solid;
+    cursor: pointer;
+  }
+.custom-file-upload:active {
+    color: var(--redrange-darken);
+    border: 4px var(--redrange-darken) solid;
+    background-color: var(--light-gray);
+  }
+.custom-file-upload i {
+    color: var(--redrange);
+    padding-top: 4px;
+    font-size: 24px;
+  }
+  .custom-file-upload:active i {
+    color: var(--redrange-darken);
+
+  }
+  .custom-file-upload h5 {
+    margin: 0px;
+    padding-left: 8px;
+  }

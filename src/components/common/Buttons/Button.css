@@ -1,0 +1,86 @@
+@import "/src/components/common/colors.css";
+
+button.primary {
+  background-color: var(--redrange);
+  color: var(--white);
+  border: 4px var(--redrange) solid;
+}
+button.primary i,
+button.primary h5 {
+  color: var(--white);
+}
+
+button.primary:hover {
+  background-color: var(--white);
+  color: var(--redrange);
+  border: 4px var(--redrange) solid;
+}
+button.primary:hover i,
+button.primary:hover h5 {
+  color: var(--redrange);
+}
+button.primary:active {
+  background-color: var(--redrange-darken);
+  color: var(--white);
+}
+button.primary:active i {
+  color: var(--white);
+}
+button.secondary {
+  background-color: var(--white);
+  color: var(--redrange);
+  border: 4px var(--light-gray) solid;
+}
+button.secondary i {
+  color: var(--redrange);
+}
+button.secondary:hover {
+  border: 4px var(--redrange) solid;
+}
+/* button.secondary:hover i {
+} */
+button.secondary:active {
+  color: var(--redrange-darken);
+  border: 4px var(--redrange-darken) solid;
+  background-color: var(--light-gray);
+}
+button.secondary:active i {
+  color: var(--redrange-darken);
+}
+/* button.tertiary {
+}
+button.tertiary i {
+}
+button.tertiary:hover {
+}
+button.tertiary:hover i {
+}
+button.tertiary:active {
+}
+button.tertiary:active i {
+} */
+
+button {
+  border-radius: 32px;
+  min-height: 32px;
+  border: none;
+  outline: none;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button:disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+}
+button:hover {
+  cursor: pointer;
+}
+button i {
+  padding-top: 4px;
+}
+button h5 {
+  margin: 0px;
+  padding-left: 8px;
+}

@@ -1,0 +1,99 @@
+@import "/src/components/common/colors.css";
+
+.nodeCard {
+  height: 233px;
+  max-width: 704px;
+  border: 1px var(--light-gray) solid;
+  border-radius: 32px;
+  margin: 8px;
+  padding: 24px;
+  background-color: var(--white);
+}
+
+.nodeCard.gridContainer {
+  display: grid;
+  justify-content: space-between;
+  grid-template-rows: 32px 104px 32px;
+  grid-template-columns: 432px 152px;
+  row-gap: 32px;
+  column-gap: 32px;
+}
+
+.nodeCard.gridContainer .gridItem1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.nodeCard.gridContainer .gridItem1 .title {
+  display: flex;
+  align-items: flex-end;
+}
+.nodeCard.gridContainer .gridItem1 .title h3 {
+  display: flex;
+  align-items: flex-end;
+  color: var(--redrange);
+}
+.nodeCard.gridContainer .gridItem1 .title span {
+  padding-left: 16px;
+  color: var(--dark-gray);
+}
+
+.nodeCard.gridContainer .gridItem2 {
+  display: grid;
+  grid-template-rows: 24px 24px 24px;
+  grid-template-columns: auto auto;
+  grid-gap: 16px;
+}
+
+.nodeCard.gridContainer .gridItem2 .tableItem1,
+.nodeCard.gridContainer .gridItem2 .tableItem3 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: bold;
+}
+.nodeCard.gridContainer .gridItem2 .tableItem2,
+.nodeCard.gridContainer .gridItem2 .tableItem4 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nodeCard.gridContainer .gridItem2 .tableItem5,
+.nodeCard.gridContainer .gridItem2 .tableItem6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nodeCard.gridContainer .gridItem2 .tableItem5 span,
+.nodeCard.gridContainer .gridItem2 .tableItem6 span {
+  font-weight: bold;
+}
+
+.nodeCard.gridContainer .gridItem3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nodeCard.gridContainer .gridItem4 {
+  grid-row: 1/4;
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.nodeCard.gridContainer .gridItem4 .score {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 136px;
+  width: 136px;
+  border: 8px solid;
+  border-radius: 100px;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
