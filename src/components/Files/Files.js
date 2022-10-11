@@ -61,12 +61,16 @@ const Files = () => {
     <div className="section">
       <h1>Mi unidad</h1>{" "}
       {/** TODO: make reflect the current folder/file route */}
-      <h2>Carpetas</h2>
-      <div className="container">
-        {status === "loading" && <span> Cargando... </span>}
-        {status === "loaded" &&
-          folderList.map((folder) => <Folder key={folder.id} data={folder} />)}
-      </div>
+      {folderList.length > 0 && <h2>Carpetas</h2>}
+      {folderList.length > 0 && (
+        <div className="container">
+          {status === "loading" && <span> Cargando... </span>}
+          {status === "loaded" &&
+            folderList.map((folder) => (
+              <Folder key={folder.id} data={folder} />
+            ))}
+        </div>
+      )}
       <h2>Archivos</h2>
       <div className="container">
         {status === "loading" && <span> Cargando... </span>}

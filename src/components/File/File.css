@@ -31,8 +31,16 @@ button.file .footer {
   align-items: center;
   box-sizing: border-box;
   border-top: 1px var(--light-gray) solid;
+  overflow: hidden;
+  text-align: left;
 }
 
 button.file .footer i {
   font-size: 24px;
 }
+
+button.file .footer h5 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+

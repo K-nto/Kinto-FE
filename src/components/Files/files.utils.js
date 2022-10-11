@@ -33,20 +33,6 @@ export function getFileType(file) {
   }
 }
 
-export function filterFoldersFromFiles(rawFiles) {
-  // @TODO: DELETE-  Unnecesary with redux
-  const filteredFolders = [];
-  const filteredFiles = [];
-
-  rawFiles.forEach((element) => {
-    // @TODO: All CIDs return the same!!! will have to come as strings from BE
-    element.type === "directory"
-      ? filteredFolders.push(element)
-      : filteredFiles.push({ ...element, type: getFileType(element) });
-  });
-  return { filteredFolders, filteredFiles };
-}
-
 export async function uploadFiles(currentUser, fileList) {
   const formData = new FormData();
   if (fileList.length > 1) return "Only one file at a time!";

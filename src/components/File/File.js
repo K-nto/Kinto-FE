@@ -1,4 +1,9 @@
+import axios from "axios";
+import { saveAs } from "file-saver";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { FILES_ROUTE, KINTO_SERVICE_URL, USERS_ROUTE } from "../../config";
+import { selectUser } from "../../store/user/user.selector";
 import "./File.css";
 
 const getIconFromType = (type) => {
@@ -48,11 +53,24 @@ const getIconFromType = (type) => {
 
 const File = (props) => {
   const { data } = props;
-  const { name, type, size } = data;
+  const currentUser = useSelector(selectUser);
+  const { name, type, size, id } = data;
   const [icon, setIcon] = useState(getIconFromType(type));
 
+  const requestFile = () => {
+    axios
+      .get(
+        `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.name}/${FILES_ROUTE}/${id}`,
+        { responseType: "blob" }
+      )
+      .then((response) => {
+        saveAs(response.data, name);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
-    <button className="file">
+    <button className="file" onClick={requestFile}>
       <div className="icon">
         <i className={`${icon.class}`} style={{ color: icon.color }}></i>
       </div>
