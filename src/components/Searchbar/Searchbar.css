@@ -5,7 +5,6 @@
   padding: 0px 20px;
   height: 48px;
   width: 720px;
-  border: none;
   border: 1px var(--light-gray) solid;
   border-radius: 32px;
 }

@@ -2,7 +2,7 @@ import "./Button.css";
 import { useEffect, useState } from "react";
 
 const Button = (props) => {
-  const { icon, style, label, height, width, iconSize, onClick } = props;
+  const { icon, style, label, height, width, iconSize, onClick, type } = props;
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     if (props.disabled) {
@@ -11,6 +11,8 @@ const Button = (props) => {
   }, []);
   return !disabled ? (
     <button
+      type={type ? type : "button"}
+      value={label}
       className={style}
       style={{ height: height, width: width, fontSize: iconSize }}
       onClick={(e) => (onClick ? onClick(e) : undefined)}
