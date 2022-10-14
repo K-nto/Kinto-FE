@@ -1,33 +1,49 @@
-import Chip from "../common/Chip/Chip";
-import Button from "../common/Buttons/Button";
+import Chip from "../../common/Chip/Chip";
+import Button from "../../common/Buttons/Button";
 import { useEffect, useState } from "react";
 import "./NodeCard.css";
-const BYTES_IN_GB = 1073741824;
+import "../../common/colors.css";
 const NodeCard = (props) => {
-  const { alias, id, type, status, lastSync, size, used, score } = props.data;
+  const {
+    alias,
+    id,
+    status,
+    latestUpdateDate,
+    contributedSpace,
+    availableSpaceForUser,
+    confidence,
+  } = props.data;
   const [disabled, setDisabled] = useState(false); // probably a hook dependant on status will be better
   const [statusColor, setStatusColor] = useState("--dark-gray");
   const [transformedId, setTransformedId] = useState("");
-  const [transformedScore, setTransformedScore] = useState("--");
-  const [lastSyncDate, setLastSyncDate] = useState("");
-  const [transformedSize, setTransformedSize] = useState("-");
-  const [transforemdUsed, setTransformedUsed] = useState("-");
-  const [scoreBorderColor, setScoreBorderColor] = useState("--light-gray");
+  const [transformedConfidence, setTransformedConfidence] = useState("--");
+  const [transformedLatestUpdateDate, setTransformedLatestUpdateDate] =
+    useState("");
+  const [transformedContributedSpace, setTransformedContributedSpace] =
+    useState("-");
+  const [
+    transforemdAvailableSpaceForUser,
+    setTransformedAvailableSpaceForUser,
+  ] = useState("-");
+  const [confidenceBorderColor, setConfidenceBorderColor] =
+    useState("--light-gray");
 
   useEffect(() => {
     if (id) {
       setTransformedId(transformId(id));
     }
-    if (score) {
-      setTransformedScore(scoreToPercentage(score));
-      if (score <= 0.6) {
-        setScoreBorderColor("--redrange-darken");
-      } else if (score <= 0.85) {
-        setScoreBorderColor("--lemon");
+    console.log("confidence " + confidence);
+    if (confidence) {
+      setTransformedConfidence(confidenceToPercentage(confidence));
+      if (confidence <= 60) {
+        setConfidenceBorderColor("--redrange-darken");
+      } else if (confidence <= 85) {
+        setConfidenceBorderColor("--lemon");
       } else {
-        setScoreBorderColor("--lime");
+        setConfidenceBorderColor("--lime");
       }
     }
+    console.log("border " + confidenceBorderColor);
     if (status) {
       setDisabled(status !== "online"); // TODO: Fix disabled state for card and buttons
       switch (status) {
@@ -42,20 +58,20 @@ const NodeCard = (props) => {
           break;
       }
     }
-    if (lastSync) {
-      setLastSyncDate(new Date(lastSync).toISOString());
+    if (latestUpdateDate) {
+      console.log(latestUpdateDate.toISOString());
+      setTransformedLatestUpdateDate(latestUpdateDate.toISOString());
     }
-    if (size) {
-      setTransformedSize(bytesToGBTransform(size) + " GB");
+    if (contributedSpace) {
+      setTransformedContributedSpace(contributedSpace + " GB");
     }
-    if (used) {
-      setTransformedUsed(bytesToGBTransform(used) + " GB");
+    if (availableSpaceForUser) {
+      setTransformedAvailableSpaceForUser(availableSpaceForUser + " GB");
     }
   }, []);
 
   const transformId = (id) => id.slice(0, 4) + "..." + id.slice(-4);
-  const scoreToPercentage = (score) => score * 100 + "%";
-  const bytesToGBTransform = (size) => (size / BYTES_IN_GB).toPrecision(2);
+  const confidenceToPercentage = (confidence) => confidence + "%";
 
   return (
     <div className="nodeCard gridContainer">
@@ -63,7 +79,6 @@ const NodeCard = (props) => {
         <div className="title">
           <h3>{alias}</h3> <span>{transformedId}</span>
         </div>
-        <Chip value={type.toUpperCase()} color="--redrange-lighten" />
       </div>
       <div className="gridItem2">
         <div className="tableItem1">Estado:</div>
@@ -72,14 +87,14 @@ const NodeCard = (props) => {
         </div>
         <div className="tableItem3"> Ultima actualización:</div>
         {/* TODO: Fix date */}
-        <div className="tableItem4">{lastSyncDate}</div>
+        <div className="tableItem4">{transformedLatestUpdateDate}</div>
         <div className="tableItem5">
           <span>Tamaño: </span>
-          {transformedSize}
+          {transformedContributedSpace}
         </div>
         <div className="tableItem6">
-          <span>En uso: </span>
-          {transforemdUsed}
+          <span>Disponible para el usuario: </span>
+          {transforemdAvailableSpaceForUser}
         </div>
       </div>
 
@@ -100,10 +115,10 @@ const NodeCard = (props) => {
       </div>
       <div className="gridItem4">
         <div
-          className="score"
-          style={{ borderColor: `var(${scoreBorderColor})` }}
+          className="confidence"
+          style={{ borderColor: `var(${confidenceBorderColor})` }}
         >
-          {transformedScore}
+          {transformedConfidence}
         </div>
         Confianza
       </div>

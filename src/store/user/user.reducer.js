@@ -1,4 +1,4 @@
-import { USER_LOG_IN, USER_LOG_OUT } from "./user.actions";
+import { ADD_USER_CAPACITY, USER_LOG_IN, USER_LOG_OUT } from "./user.actions";
 
 const initialState = {
   address: undefined,
@@ -21,6 +21,12 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         initialState,
+      };
+    }
+    case ADD_USER_CAPACITY: {
+      return {
+        ...state,
+        availableSpace: state.availableSpace + action.payload,
       };
     }
     default:

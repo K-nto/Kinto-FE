@@ -17,7 +17,7 @@ const Button = (props) => {
       style={{ height: height, width: width, fontSize: iconSize }}
       onClick={(e) => (onClick ? onClick(e) : undefined)}
     >
-      <i className={`fi ${icon}`}></i>
+      <i className={`fi ${icon}`} style={{ fontSize: iconSize }}></i>
       {label && <h5>{label}</h5>}
     </button>
   ) : (

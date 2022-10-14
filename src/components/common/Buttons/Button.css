@@ -62,7 +62,7 @@ button.tertiary:active i {
 
 button {
   border-radius: 32px;
-  min-height: 32px;
+  height: 32px;
   border: none;
   outline: none;
   padding: 0px 20px;

@@ -2,8 +2,8 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { FILES_ROUTE, KINTO_SERVICE_URL, USERS_ROUTE } from "../../config";
-import { selectUser } from "../../store/user/user.selector";
+import { FILES_ROUTE, KINTO_SERVICE_URL, USERS_ROUTE } from "../../../config";
+import { selectUser } from "../../../store/user/user.selector";
 import "./File.css";
 
 const getIconFromType = (type) => {

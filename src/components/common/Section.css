@@ -8,14 +8,14 @@
   color: var(--redrange);
   margin: 12px 16px;
 }
-.section > h2 {
+.section > * > h2 {
   padding: 10px 16px;
   border-top: 1px var(--light-gray) solid;
   border-bottom: 1px var(--light-gray) solid;
   box-sizing: border-box;
 }
 
-.section > .container {
+.section .container {
   margin: 16px;
   display: flex;
   flex-wrap: wrap;
