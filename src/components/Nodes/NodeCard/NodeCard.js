@@ -6,11 +6,11 @@ import "../../common/colors.css";
 const NodeCard = (props) => {
   const {
     alias,
-    id,
+    entityId,
     status,
     latestUpdateDate,
     contributedSpace,
-    availableSpaceForUser,
+    userAvailableSpace,
     confidence,
   } = props.data;
   const [disabled, setDisabled] = useState(false); // probably a hook dependant on status will be better
@@ -29,10 +29,10 @@ const NodeCard = (props) => {
     useState("--light-gray");
 
   useEffect(() => {
-    if (id) {
-      setTransformedId(transformId(id));
+    console.log(props.data);
+    if (entityId) {
+      setTransformedId(transformId(entityId));
     }
-    console.log("confidence " + confidence);
     if (confidence) {
       setTransformedConfidence(confidenceToPercentage(confidence));
       if (confidence <= 60) {
@@ -43,9 +43,7 @@ const NodeCard = (props) => {
         setConfidenceBorderColor("--lime");
       }
     }
-    console.log("border " + confidenceBorderColor);
     if (status) {
-      setDisabled(status !== "online"); // TODO: Fix disabled state for card and buttons
       switch (status) {
         case "online":
           setStatusColor("--lime-darken"); // TODO: Fix chip colors
@@ -59,14 +57,13 @@ const NodeCard = (props) => {
       }
     }
     if (latestUpdateDate) {
-      console.log(latestUpdateDate.toISOString());
-      setTransformedLatestUpdateDate(latestUpdateDate.toISOString());
+      setTransformedLatestUpdateDate(latestUpdateDate);
     }
     if (contributedSpace) {
       setTransformedContributedSpace(contributedSpace + " GB");
     }
-    if (availableSpaceForUser) {
-      setTransformedAvailableSpaceForUser(availableSpaceForUser + " GB");
+    if (userAvailableSpace) {
+      setTransformedAvailableSpaceForUser(userAvailableSpace + " GB");
     }
   }, []);
 

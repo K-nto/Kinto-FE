@@ -1,6 +1,14 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { KINTO_NODES_URL, NODES_ROUTE, USERS_ROUTE } from "../../config";
+import {
+  SET_NODES_LIST,
+  SET_NODES_LOADED,
+  SET_NODES_LOADING,
+} from "../../store/nodes/nodes.actions";
 import { selectNodeList } from "../../store/nodes/nodes.selectors";
+import { selectUser } from "../../store/user/user.selector";
 import "../common/Section.css";
 import NewNodeCard from "./NodeCard/NewNodeCard";
 import NodeCard from "./NodeCard/NodeCard";
@@ -50,8 +58,25 @@ import NodeCard from "./NodeCard/NodeCard";
 
 const Nodes = () => {
   const nodes = useSelector(selectNodeList);
-
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    requestNodeList(user.address);
+  }, []);
+
+  const requestNodeList = async (address) => {
+    dispatch({ type: SET_NODES_LOADING });
+    const nodeList = await axios
+      .get(`${KINTO_NODES_URL}/${USERS_ROUTE}/${address}/${NODES_ROUTE}`)
+      .then((res) => res.data)
+      .catch((err) => {
+        throw new Error(err.message);
+      });
+
+    dispatch({ type: SET_NODES_LIST, payload: { nodeList } });
+    dispatch({ type: SET_NODES_LOADED });
+  };
 
   return (
     <div className="section">

@@ -4,7 +4,7 @@ import Button from "../../common/Buttons/Button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../../store/user/user.selector";
-import { postNewNode } from "../Nodes.utils";
+import { exportToJsonFile, postNewNode } from "../Nodes.utils";
 import { PUSH_TO_NODES_LIST } from "../../../store/nodes/nodes.actions";
 import { ADD_USER_CAPACITY } from "../../../store/user/user.actions";
 const NewNodeCard = () => {
@@ -16,14 +16,16 @@ const NewNodeCard = () => {
 
   const requestNewNode = async () => {
     setRequestingNode(true);
+
     const newNodeInfo = await postNewNode(userInfo.address, 100, alias);
 
+    exportToJsonFile(newNodeInfo);
     // MOCKED
     dispatch({ type: PUSH_TO_NODES_LIST, payload: { nodes: [newNodeInfo] } });
     // TODO: fetch from the service
     dispatch({
       type: ADD_USER_CAPACITY,
-      payload: newNodeInfo.availableSpaceForUser,
+      payload: newNodeInfo.userAvailableSpace,
     });
 
     setRequestingNode(false);

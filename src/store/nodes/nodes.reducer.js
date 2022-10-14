@@ -26,12 +26,12 @@ export function nodesReducer(state = initialState, action) {
     case SET_NODES_LOADING:
       return {
         ...state,
-        fileStatus: "loading",
+        nodeStatus: "loading",
       };
     case SET_NODES_LOADED:
       return {
         ...state,
-        fileStatus: "loaded",
+        nodeStatus: "loaded",
       };
     default:
       return { ...state };
