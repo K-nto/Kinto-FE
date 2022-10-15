@@ -1,5 +1,5 @@
 export const requestLogin = async (address, password) => {
-  if (address === "asd123" && password === "12345") {
+  if (address === "Jazmin" && password === "12345") {
     return {
       // TODO: actually authenticate
       address: "asd123", // Wallet address
