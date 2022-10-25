@@ -3,11 +3,13 @@ import Button from "../../common/Buttons/Button";
 import { useEffect, useState } from "react";
 import "./NodeCard.css";
 import "../../common/colors.css";
+import { deleteNode, requestNodeList, updateNode } from "../Nodes.utils";
 const NodeCard = (props) => {
   const {
     alias,
     entityId,
     status,
+    wallet,
     latestUpdateDate,
     contributedSpace,
     userAvailableSpace,
@@ -27,7 +29,6 @@ const NodeCard = (props) => {
   ] = useState("-");
   const [confidenceBorderColor, setConfidenceBorderColor] =
     useState("--light-gray");
-
   useEffect(() => {
     console.log(props.data);
     if (entityId) {
@@ -45,7 +46,7 @@ const NodeCard = (props) => {
     }
     if (status) {
       switch (status) {
-        case "online":
+        case "connected":
           setStatusColor("--lime-darken"); // TODO: Fix chip colors
           break;
         case "connecting":
@@ -70,6 +71,15 @@ const NodeCard = (props) => {
   const transformId = (id) => id.slice(0, 4) + "..." + id.slice(-4);
   const confidenceToPercentage = (confidence) => confidence + "%";
 
+  const disconnectEvent = async () => {
+    if (status === "connected") {
+      await updateNode(wallet, entityId, { status: "disconnected" });
+    } else if (status === "disconnected") {
+      console.log(wallet, entityId);
+      await deleteNode(wallet, entityId);
+    }
+    await requestNodeList(wallet);
+  };
   return (
     <div className="nodeCard gridContainer">
       <div className="gridItem1">
@@ -97,10 +107,11 @@ const NodeCard = (props) => {
 
       <div className="gridItem3">
         <Button
-          icon="fi-br-power"
+          icon={status === "connected" ? "fi-br-power" : "fi-br-cross"}
           style="secondary"
-          label="Desconectar"
+          label={status === "connected" ? "Desconectar" : "Eliminar"}
           disabled={disabled}
+          onClick={disconnectEvent}
         />
         <Button
           icon="fi-br-settings-sliders"

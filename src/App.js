@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Files from "./components/Files/Files";
@@ -13,7 +12,7 @@ import { selectAuthenticated } from "./store/app/app.selector";
 import { RequireAuth } from "./components/common/RequireAuth/RequireAuth";
 import { Login } from "./components/Login/Login";
 
-const appStore = configureAppStore();
+export const appStore = configureAppStore();
 
 const App = () => {
   const authenticated = useSelector(selectAuthenticated);

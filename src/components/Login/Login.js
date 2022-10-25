@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { SET_ACTIVE_SECTION } from "../../store/app/app.actions";
 import { selectAuthenticated } from "../../store/app/app.selector";
 import { USER_LOG_IN } from "../../store/user/user.actions";
 import Button from "../common/Buttons/Button";
-import "./Login.css";
+// eslint-disable-next-line import/no-unresolved
 import { requestLogin } from "./Login.utils";
+import "./Login.css";
 
 export const Login = () => {
   const [address, setaddress] = useState("");

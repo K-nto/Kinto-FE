@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Chip.css";
+import "../../common/colors.css";
 
 const Chip = (props) => {
   const [color, setColor] = useState("");
