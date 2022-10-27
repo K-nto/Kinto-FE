@@ -2,6 +2,7 @@ import { ADD_USER_CAPACITY, USER_LOG_IN, USER_LOG_OUT } from "./user.actions";
 
 const initialState = {
   address: undefined,
+  privateKey: undefined,
   name: undefined,
   availableSpace: undefined,
   usedSpace: undefined,
