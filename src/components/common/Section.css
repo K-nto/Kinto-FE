@@ -1,0 +1,22 @@
+@import "./colors.css";
+.section {
+  width: 100%;
+  max-width: calc(100vw - 256px);
+  overflow-y: scroll;
+}
+.section > h1 {
+  color: var(--redrange);
+  margin: 12px 16px;
+}
+.section > * > h2 {
+  padding: 10px 16px;
+  border-top: 1px var(--light-gray) solid;
+  border-bottom: 1px var(--light-gray) solid;
+  box-sizing: border-box;
+}
+
+.section .container {
+  margin: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}

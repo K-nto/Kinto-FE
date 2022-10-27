@@ -1,0 +1,81 @@
+@import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
+@import "/src/components/common/colors.css";
+
+body,
+html {
+  font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+p,
+span,
+i {
+  color: var(--purplack);
+  margin: 0;
+}
+
+h1 {
+  font-family: "Amaranth";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+h2 {
+  font-family: "Amaranth";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 34px;
+}
+
+h3 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+h4 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+h5 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+}
+a,
+span,
+p {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+a {
+  color: black;
+}
+a:link,
+a:visited {
+  color: black;
+  text-decoration: none;
+}

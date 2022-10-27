@@ -1,0 +1,14 @@
+@import "/src/components/common/colors.css";
+
+.noAvailableSpace {
+    text-align: center;
+    padding: 96px;
+}
+
+.noAvailableSpace a {
+    font-family: Lato;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--redrange);
+}

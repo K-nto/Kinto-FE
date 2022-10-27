@@ -1,0 +1,52 @@
+@import "/src/components/common/colors.css";
+
+.loginContent {
+    display: flex;
+    padding-top: 16vh;
+    width: 100vw;
+    justify-content: center;
+}
+.loginForm {
+    padding: 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--redrange-lighten);
+    height: fit-content;
+    border-radius: 32px;
+}
+.loginForm h2 {
+    margin-bottom: 32px;
+}
+.loginForm h4 {
+    margin-bottom: 16px;
+}
+
+.loginForm label {
+    display: none;
+}
+.loginForm input{
+    width: calc(100% - 32px);
+    height: 48px;
+    border-radius: 32px;
+    border: 1px var(--light-gray) solid;
+    font-size: 16px;
+    padding: 0 16px 0;
+    margin-bottom: 16px; 
+}
+
+.loginForm input:focus-visible {
+    border: 1px var(--redrange) solid;
+  }
+.loginForm .errorMessage {
+    color: var(--redrange);
+    font-weight: bolder;
+}
+.buttonContainer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: right;
+}
+.buttonContainer button {
+    margin-left: 16px;
+}
