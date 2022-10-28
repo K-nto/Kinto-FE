@@ -6,10 +6,15 @@ import Button from "../common/Buttons/Button";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/user.selector";
 import { selectAuthenticated } from "../../store/app/app.selector";
+import { logout } from "../Login/Login.utils";
 
 const TitleBar = () => {
   const authenticated = useSelector(selectAuthenticated);
   const currentUser = useSelector(selectUser);
+
+  const logoutEvent = () => {
+    logout();
+  };
   return (
     <div className="titleBar">
       <div className="logo">
@@ -34,6 +39,7 @@ const TitleBar = () => {
               height="48px"
               width="48px"
               iconSize="24px"
+              onClick={logoutEvent}
             />
           </div>
         </div>

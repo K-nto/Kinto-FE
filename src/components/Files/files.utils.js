@@ -33,13 +33,13 @@ export function getFileType(file) {
   }
 }
 
-export async function uploadFiles(currentUser, fileList) {
+export async function uploadFiles(address, fileList) {
   const formData = new FormData();
   if (fileList.length > 1) return "Only one file at a time!";
   formData.append("file", fileList[0]);
   return await axios
     .post(
-      `${KINTO_SERVICE_URL}/${USERS_ROUTE}/guest/${FILES_ROUTE}`,
+      `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${address}/${FILES_ROUTE}`,
       formData,
       {
         onUploadProgress: (ProgressEvent) => {

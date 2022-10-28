@@ -19,6 +19,7 @@ import {
 } from "../../store/files/files.actions";
 import { NavLink } from "react-router-dom";
 import { SET_ACTIVE_SECTION } from "../../store/app/app.actions";
+import axios from "axios";
 
 const Files = () => {
   // we'll get one array (or tree?) of files and folders
@@ -41,11 +42,17 @@ const Files = () => {
   // @TODO: userId! not name
   async function requestFileList() {
     dispatch({ type: SET_FILES_LOADING });
-    const res = await fetch(
-      `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.name}/${FILES_ROUTE}`
-    );
-
-    const rawFiles = await res.json();
+    console.log("Authhash: " + currentUser.authHash);
+    const rawFiles = await axios
+      .get(
+        `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.address}/${FILES_ROUTE}`,
+        {
+          headers: {
+            authorization: currentUser.authHash,
+          },
+        }
+      )
+      .then((res) => res.data);
 
     dispatch({
       type: SET_FILES_LIST,
@@ -62,7 +69,7 @@ const Files = () => {
 
   return (
     <div className="section">
-      <h1>Mi unidad</h1>{" "}
+      <h1>Unidad de {currentUser.name}</h1>{" "}
       {currentUser.availableSpace === 0 && (
         <div className="container noAvailableSpace">
           <h3>
