@@ -13,21 +13,28 @@ import {
 const SideBar = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-  async function handleUploadFiles(e) {
-    dispatch({ type: SET_FILES_LOADING });
-    const result = await uploadFiles(
-      currentUser.address,
-      currentUser.authHash,
-      e.target.files
-    );
-
+  const addFilesToState = (files) => {
+    // wrap this & error handling in a callback
     dispatch({
       type: PUSH_TO_FILES_LIST,
       payload: {
-        files: result,
+        files: files,
       },
     });
     dispatch({ type: SET_FILES_LOADED });
+  };
+  async function handleUploadFiles(e) {
+    dispatch({ type: SET_FILES_LOADING });
+    await uploadFiles(
+      currentUser.address,
+      currentUser.privateKey,
+      currentUser.authHash,
+      e.target.files,
+      addFilesToState
+    ).catch((e) => {
+      console.error("Error uploading files: " + e.message);
+      dispatch({ type: SET_FILES_LOADED });
+    });
   }
   return (
     <div className="sidebar">
