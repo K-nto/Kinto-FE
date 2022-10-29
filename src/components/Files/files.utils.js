@@ -33,7 +33,7 @@ export function getFileType(file) {
   }
 }
 
-export async function uploadFiles(address, fileList) {
+export async function uploadFiles(address, authHash, fileList) {
   const formData = new FormData();
   if (fileList.length > 1) return "Only one file at a time!";
   formData.append("file", fileList[0]);
@@ -42,6 +42,9 @@ export async function uploadFiles(address, fileList) {
       `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${address}/${FILES_ROUTE}`,
       formData,
       {
+        headers: {
+          authorization: authHash,
+        },
         onUploadProgress: (ProgressEvent) => {
           let progress =
             Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100) +
