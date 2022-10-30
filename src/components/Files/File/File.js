@@ -1,5 +1,6 @@
 import axios from "axios";
 import { saveAs } from "file-saver";
+import CryptoJS from "crypto-js";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { FILES_ROUTE, KINTO_SERVICE_URL, USERS_ROUTE } from "../../../config";
@@ -61,10 +62,15 @@ const File = (props) => {
     axios
       .get(
         `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.address}/${FILES_ROUTE}/${id}`,
-        { responseType: "blob", authorization: currentUser.authHash }
+        { authorization: currentUser.authHash }
       )
       .then((response) => {
-        saveAs(response.data, name);
+        const file = response.data;
+        const decryptedData = CryptoJS.AES.decrypt(
+          file.fileData,
+          currentUser.privateKey
+        ).toString(CryptoJS.enc.Utf8);
+        saveAs(decryptedData, file.name);
       })
       .catch((e) => console.log(e));
   };

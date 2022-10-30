@@ -34,7 +34,6 @@ export function getFileType(file) {
 }
 
 export async function postFile(address, authHash, formData) {
-  console.log(formData);
   return await axios
     .post(
       `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${address}/${FILES_ROUTE}`,
@@ -61,6 +60,7 @@ export async function postFile(address, authHash, formData) {
       throw e;
     });
 }
+
 export async function uploadFiles(
   address,
   privateKey,
@@ -68,23 +68,27 @@ export async function uploadFiles(
   fileList,
   callback
 ) {
-  if (fileList.length > 1) throw "Only one file at a time!";
-  const formData = new FormData();
+  if (fileList.length > 1) throw new Error("Only one file at a time!");
+  if (fileList[0].size > 1024 * 1024)
+    throw new Error("File is too big to be encrypted!, we're working on it :)");
   const reader = new FileReader();
-  reader.onload = async function (e) {
-    const encrypted = CryptoJS.AES.encrypt(e.target.result, privateKey);
-    const encryptedFile = "data:application/octet-stream," + encrypted;
-
-    formData.append("file", encryptedFile);
-
-    const uploadedFiles = await postFile(address, authHash, formData);
-
-    callback(uploadedFiles);
-    // SEND POST
-    // EXECUTE CALLBACk
-    // return postFile(address, authHash, formData);
+  const formData = new FormData();
+  const metadata = {
+    name: fileList[0].name,
+    type: fileList[0].type,
+    address: address,
   };
-
+  reader.onloadend = async function () {
+    const result = reader.result ?? "";
+    const encryptedData = CryptoJS.AES.encrypt(result, privateKey);
+    formData.append("fileData", encryptedData.toString());
+    formData.append("name", metadata.name);
+    formData.append("type", metadata.type);
+    formData.append("address", address);
+    const uploadedFiles = await postFile(address, authHash, formData);
+    callback(uploadedFiles);
+  };
+  console.log(fileList[0]);
   reader.readAsDataURL(fileList[0]);
 
   // return await axios
