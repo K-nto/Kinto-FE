@@ -1,20 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { ADDRESS_COOKIE, AUTH_HASH_COOKIE } from "../../config";
+import { getCookie } from "../../helpers/cookieManager";
 import { selectAuthenticated } from "../../store/app/app.selector";
 import { USER_LOG_IN } from "../../store/user/user.actions";
 import Button from "../common/Buttons/Button";
-// eslint-disable-next-line import/no-unresolved
-import { requestLogin } from "./Login.utils";
 import "./Login.css";
+import { requestLogin } from "./Login.utils";
 
 export const Login = () => {
-  const [address, setaddress] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const authenticated = useSelector(selectAuthenticated);
 
   const dispatch = useDispatch();
+
+  const dispatchLogin = async () => {
+    await requestLogin(address, password, rememberMe)
+      .then((addressInfo) => {
+        dispatch({ type: USER_LOG_IN, payload: addressInfo });
+      })
+      .catch((err) => setErrorMessage(err.message));
+  };
+
+  useEffect(() => {
+    const addressFromCookie = getCookie(ADDRESS_COOKIE);
+    const authHashCookie = getCookie(AUTH_HASH_COOKIE);
+    if (addressFromCookie && authHashCookie) {
+      setAddress(addressFromCookie);
+      dispatchLogin();
+    }
+  });
 
   if (authenticated) return <Navigate to="/files" />;
 
@@ -26,11 +45,7 @@ export const Login = () => {
       return;
     }
 
-    await requestLogin(address, password)
-      .then((addressInfo) => {
-        dispatch({ type: USER_LOG_IN, payload: addressInfo });
-      })
-      .catch((err) => setErrorMessage(err.message));
+    await dispatchLogin();
   };
 
   return (
@@ -44,7 +59,7 @@ export const Login = () => {
             type="text"
             id="address"
             placeholder="Dirección"
-            onChange={(e) => setaddress(e.target.value)}
+            onChange={(e) => setAddress(e.target.value)}
           ></input>
           <label htmlFor="password">Contraseña</label>
           <input
@@ -53,7 +68,15 @@ export const Login = () => {
             placeholder="Contraseña"
             onChange={(e) => setPassword(e.target.value)}
           ></input>
-
+          <label htmlFor="rememberMe"> Recordar información? </label>
+          <div className="checkboxContainer">
+            <input
+              id="rememberMe"
+              type="checkbox"
+              onChange={(e) => setRememberMe(e.target.value)}
+            ></input>{" "}
+            <h5>Recuérdame</h5>
+          </div>
           {errorMessage && <p className="errorMessage">{errorMessage}</p>}
           <div className="buttonContainer">
             <Button style="secondary" label="Registrate"></Button>
