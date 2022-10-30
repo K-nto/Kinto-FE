@@ -71,6 +71,8 @@ export async function uploadFiles(
   if (fileList.length > 1) throw new Error("Only one file at a time!");
   if (fileList[0].size > 1024 * 1024)
     throw new Error("File is too big to be encrypted!, we're working on it :)");
+  if (fileList[0].name.indexOf("}") !== -1)
+    throw new Error("Invalid file name");
   const reader = new FileReader();
   const formData = new FormData();
   const metadata = {
