@@ -60,8 +60,8 @@ const File = (props) => {
   const requestFile = () => {
     axios
       .get(
-        `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.name}/${FILES_ROUTE}/${id}`,
-        { responseType: "blob" }
+        `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.address}/${FILES_ROUTE}/${id}`,
+        { responseType: "blob", authorization: currentUser.authHash }
       )
       .then((response) => {
         saveAs(response.data, name);

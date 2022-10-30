@@ -15,7 +15,11 @@ const SideBar = () => {
   const dispatch = useDispatch();
   async function handleUploadFiles(e) {
     dispatch({ type: SET_FILES_LOADING });
-    const result = await uploadFiles(currentUser, e.target.files);
+    const result = await uploadFiles(
+      currentUser.address,
+      currentUser.authHash,
+      e.target.files
+    );
 
     dispatch({
       type: PUSH_TO_FILES_LIST,
