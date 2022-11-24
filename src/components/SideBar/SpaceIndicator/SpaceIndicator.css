@@ -1,0 +1,27 @@
+@import "/src/components/common/colors.css";
+
+.spaceIndicator {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.spaceIndicator h5 {
+    margin-top: 8px;
+    color: var(--purplack)
+}
+.spaceIndicator .outerBar {
+    border: 8px var(--dark-gray) solid;
+    box-sizing: border-box;
+    height: 32px;
+    border-radius: 32px;
+    width: calc(100% - 32px);
+    display: flex;
+}
+
+.spaceIndicator .innerBar {
+    height: 16px;
+    background-color: var(--dark-gray);
+    border-radius: 32px;
+}

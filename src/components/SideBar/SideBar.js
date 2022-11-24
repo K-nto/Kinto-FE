@@ -9,6 +9,7 @@ import {
   SET_FILES_LOADED,
   SET_FILES_LOADING,
 } from "../../store/files/files.actions";
+import SpaceIndicator from "./SpaceIndicator/SpaceIndicator";
 
 const SideBar = () => {
   const currentUser = useSelector(selectUser);
@@ -45,6 +46,7 @@ const SideBar = () => {
           { value: "nodes", route: "/nodes", label: "Mis nodos" },
         ]}
       />
+      <SpaceIndicator />
     </div>
   );
 };
