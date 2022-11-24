@@ -57,6 +57,7 @@ const File = (props) => {
   const currentUser = useSelector(selectUser);
   const { name, type, size, id } = data;
   const [icon, setIcon] = useState(getIconFromType(type));
+  const [actionMenuVisible, setActionMenu] = useState(false);
 
   const requestFile = () => {
     axios
@@ -75,16 +76,47 @@ const File = (props) => {
       .catch((e) => console.log(e));
   };
 
+  const toggleActionMenu = () => {
+    setActionMenu(!actionMenuVisible);
+  };
+
+  /** @TODO logic */
+  const deleteFile = () => {
+    console.log("delete file");
+    toggleActionMenu();
+  };
+
+  /** @TODO logic */
+  const reportFile = () => {
+    console.log("report file");
+    toggleActionMenu();
+  };
+
   return (
-    <button className="file" onClick={requestFile}>
-      <div className="icon">
-        <i className={`${icon.class}`} style={{ color: icon.color }}></i>
-      </div>
-      <div className="footer">
-        <i className={`${icon.class}`}></i>
-        <h5>{name}</h5>
-      </div>
-    </button>
+    <div className="fileContainer">
+      <button className="invisible" onClick={toggleActionMenu}>
+        <i className="fi fi-br-menu-dots-vertical"></i>
+      </button>
+      {actionMenuVisible && (
+        <div className="actionMenu">
+          <button className="actionItem" onClick={deleteFile}>
+            <h5>Eliminar archivo</h5>
+          </button>
+          <button className="actionItem" onClick={reportFile}>
+            <h5>Reportar archivo</h5>
+          </button>
+        </div>
+      )}
+      <button className="file" onClick={requestFile}>
+        <div className="icon">
+          <i className={`${icon.class}`} style={{ color: icon.color }}></i>
+        </div>
+        <div className="footer">
+          <i className={`${icon.class}`}></i>
+          <h5>{name}</h5>
+        </div>
+      </button>
+    </div>
   );
 };
 export default File;

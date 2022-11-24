@@ -1,5 +1,9 @@
 @import "/src/components/common/colors.css";
 
+.fileContainer {
+  position: relative
+}
+
 button.file {
   display: flex;
   flex-direction: column;
@@ -42,5 +46,39 @@ button.file .footer i {
 button.file .footer h5 {
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+button.invisible {
+  background-color: var(--white);
+  padding: 0px 10px;
+  position: absolute;
+  right: 16px;
+  top: 16px
+}
+
+button.invisible:hover {
+  background-color: var(--light-gray);
+}
+
+.actionMenu {
+  z-index: 5;
+  position: absolute;
+  top: 48px;
+  right: 24px;
+  width: 200px;
+  background-color: var(--white);
+  border: 1px var(--light-gray) solid;
+}
+
+.actionItem {
+  background-color: var(--white);
+  width: 100%;
+  padding: 8px;
+  border-radius: 0;
+}
+
+
+.actionItem:hover{
+  background-color: var(--light-gray);
 }
 
