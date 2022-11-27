@@ -2,8 +2,9 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 import CryptoJS from "crypto-js";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FILES_ROUTE, KINTO_SERVICE_URL, USERS_ROUTE } from "../../../config";
+import { DELETE_FILE } from "../../../store/files/files.actions";
 import { selectUser } from "../../../store/user/user.selector";
 import "./File.css";
 
@@ -58,6 +59,7 @@ const File = (props) => {
   const { name, type, size, id } = data;
   const [icon, setIcon] = useState(getIconFromType(type));
   const [actionMenuVisible, setActionMenu] = useState(false);
+  const dispatch = useDispatch();
 
   const requestFile = () => {
     axios
@@ -82,7 +84,20 @@ const File = (props) => {
 
   /** @TODO logic */
   const deleteFile = () => {
-    console.log("delete file");
+    axios
+      .delete(
+        `${KINTO_SERVICE_URL}/${USERS_ROUTE}/${currentUser.address}/${FILES_ROUTE}/${id}`,
+        {
+          authorization: currentUser.authHash,
+          data: {
+            fileName: name,
+          },
+        }
+      )
+      .then((response) => {
+        dispatch({ type: DELETE_FILE, payload: { id: id } });
+      })
+      .catch((e) => console.log(e));
     toggleActionMenu();
   };
 

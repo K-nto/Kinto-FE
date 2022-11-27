@@ -114,7 +114,8 @@ const Files = () => {
         >
           {status === "loading" && <span> Cargando... </span>}
 
-          {status === "loaded" &&
+          {currentUser.availableSpace !== 0 &&
+            status === "loaded" &&
             fileList.length > 0 &&
             fileList.map((file) => <File key={file.id} data={file} />)}
           {status === "loaded" && fileList.length === 0 && (

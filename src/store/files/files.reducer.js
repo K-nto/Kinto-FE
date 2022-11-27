@@ -4,6 +4,7 @@ import {
   SET_FILES_DIRECTORY,
   PUSH_TO_FILES_LIST,
   SET_FILES_LOADED,
+  DELETE_FILE,
 } from "./files.actions";
 
 const initialState = {
@@ -38,6 +39,11 @@ export function filesReducer(state = initialState, action) {
         ...state,
         dirname: action.payload.dirname,
         dirList: [],
+      };
+    case DELETE_FILE:
+      return {
+        ...state,
+        dirList: state.dirList.filter((file) => file.id !== action.payload.id),
       };
     default:
       return { ...state };

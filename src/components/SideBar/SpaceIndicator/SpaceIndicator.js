@@ -10,6 +10,7 @@ const SpaceIndicator = () => {
   const spaceUsed = useSelector(selectSpaceUsed);
   const spacePercentage = `${(spaceUsed / spaceAvailable) * 100}%`;
 
+  if (spaceAvailable === 0) return <></>;
   return (
     <div className="spaceIndicator">
       <div className="outerBar">
