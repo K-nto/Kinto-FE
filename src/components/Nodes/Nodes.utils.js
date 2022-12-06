@@ -7,8 +7,7 @@ import {
 } from "../../store/nodes/nodes.actions";
 import { appStore } from "../../App";
 
-export const requestNodeList = async (address) => {
-  appStore.dispatch({ type: SET_NODES_LOADING });
+export const refreshNodeList = async (address) => {
   const nodeList = await axios
     .get(`${KINTO_NODES_URL}/${USERS_ROUTE}/${address}/${NODES_ROUTE}`)
     .then((res) => res.data)
@@ -17,6 +16,10 @@ export const requestNodeList = async (address) => {
     });
 
   appStore.dispatch({ type: SET_NODES_LIST, payload: { nodeList } });
+};
+export const requestNodeList = async (address) => {
+  appStore.dispatch({ type: SET_NODES_LOADING });
+  await refreshNodeList(address);
   appStore.dispatch({ type: SET_NODES_LOADED });
 };
 

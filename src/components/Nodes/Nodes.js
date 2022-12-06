@@ -6,7 +6,7 @@ import { selectUser } from "../../store/user/user.selector";
 import "../common/Section.css";
 import NewNodeCard from "./NodeCard/NewNodeCard";
 import NodeCard from "./NodeCard/NodeCard";
-import { requestNodeList } from "./Nodes.utils";
+import { refreshNodeList, requestNodeList } from "./Nodes.utils";
 
 // const nodes = [
 //   {
@@ -58,6 +58,13 @@ const Nodes = () => {
   useEffect(() => {
     requestNodeList(user.address);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => refreshNodeList(user.address), 30000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [nodes]);
 
   return (
     <div className="section">

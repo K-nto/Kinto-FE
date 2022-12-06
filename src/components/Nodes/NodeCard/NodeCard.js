@@ -30,7 +30,6 @@ const NodeCard = (props) => {
   const [confidenceBorderColor, setConfidenceBorderColor] =
     useState("--light-gray");
   useEffect(() => {
-    console.log(props.data);
     if (entityId) {
       setTransformedId(transformId(entityId));
     }
@@ -66,7 +65,7 @@ const NodeCard = (props) => {
     if (userAvailableSpace) {
       setTransformedAvailableSpaceForUser(userAvailableSpace + " GB");
     }
-  }, []);
+  }, [props]);
 
   const transformId = (id) => id.slice(0, 4) + "..." + id.slice(-4);
   const confidenceToPercentage = (confidence) => confidence + "%";
@@ -75,7 +74,6 @@ const NodeCard = (props) => {
     if (status === "connected") {
       await updateNode(wallet, entityId, { status: "disconnected" });
     } else if (status === "disconnected") {
-      console.log(wallet, entityId);
       await deleteNode(wallet, entityId);
     }
     await requestNodeList(wallet);
