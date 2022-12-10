@@ -4,6 +4,7 @@
   height: 64px;
   border-bottom: 2px solid var(--light-gray);
   box-sizing: border-box;
+  background-color: var(--white);
 }
 
 .titleBar .logo {

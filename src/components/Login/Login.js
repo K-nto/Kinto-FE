@@ -8,6 +8,7 @@ import { USER_LOG_IN } from "../../store/user/user.actions";
 import Button from "../common/Buttons/Button";
 import "./Login.css";
 import { requestLogin } from "./Login.utils";
+import loginBg from "../../../resources/login.png";
 
 export const Login = () => {
   const [address, setAddress] = useState("");
@@ -50,6 +51,7 @@ export const Login = () => {
 
   return (
     <div className="loginContent">
+      <img src={loginBg} alt="cloud background" className="bg"></img>
       <div className="loginForm">
         <h2>Bienvenido/a a Kinto!</h2>
         <h4>Inicia sesión</h4>

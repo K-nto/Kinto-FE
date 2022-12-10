@@ -6,17 +6,36 @@
     width: 100vw;
     justify-content: center;
 }
+img.bg {
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+      
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+      
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 25%;
+  }
 .loginForm {
     padding: 32px;
     text-align: center;
     display: flex;
     flex-direction: column;
-    background-color: var(--redrange-lighten);
+    background-color: var(--white);
     height: fit-content;
     border-radius: 32px;
+    max-width: 512px;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .loginForm h2 {
     margin-bottom: 32px;
+    color: var(--redrange)
 }
 .loginForm h4 {
     margin-bottom: 16px;
@@ -34,6 +53,7 @@
     font-size: 16px;
     padding: 0 16px 0;
     margin-bottom: 16px; 
+    box-sizing: border-box;
 }
 
 .loginForm .checkboxContainer {
@@ -50,7 +70,7 @@
 }
 
 .loginForm input:focus-visible {
-    border: 1px var(--redrange) solid;
+    border: 4px var(--redrange) solid;
   }
 .loginForm .errorMessage {
     color: var(--redrange);
