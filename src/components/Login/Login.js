@@ -7,7 +7,7 @@ import { selectAuthenticated } from "../../store/app/app.selector";
 import { USER_LOG_IN } from "../../store/user/user.actions";
 import Button from "../common/Buttons/Button";
 import "./Login.css";
-import { requestLogin } from "./Login.utils";
+import { requestLogin, requestRegiter } from "./Login.utils";
 import loginBg from "../../../resources/login.png";
 
 export const Login = () => {
@@ -20,6 +20,7 @@ export const Login = () => {
   const dispatch = useDispatch();
 
   const dispatchLogin = async () => {
+    console.log("DISPATCH LOGIN")
     await requestLogin(address, password, rememberMe)
       .then((addressInfo) => {
         dispatch({ type: USER_LOG_IN, payload: addressInfo });
@@ -48,6 +49,26 @@ export const Login = () => {
 
     await dispatchLogin();
   };
+
+  const dispatchRegister = async () => {
+    await requestRegiter(address, password)
+      .then(async (data) => {
+        console.log("REGISTER RESPONSE: ", data)
+        await dispatchLogin()
+      })
+      .catch((err) => setErrorMessage(err.message));
+  };
+
+  const registerEvent = async (e) => {
+    setErrorMessage("");
+    e.preventDefault();
+    if (!address || !password) {
+      setErrorMessage("Por favor, introduce dirección y contraseña");
+      return;
+    }
+
+    await dispatchRegister();
+  }
 
   return (
     <div className="loginContent">
@@ -81,7 +102,7 @@ export const Login = () => {
           </div>
           {errorMessage && <p className="errorMessage">{errorMessage}</p>}
           <div className="buttonContainer">
-            <Button style="secondary" label="Registrate"></Button>
+            <Button style="secondary" label="Registrate" onClick={registerEvent}></Button>
             <Button
               style="primary"
               label="Inicia sesión"
