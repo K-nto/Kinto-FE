@@ -15,6 +15,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const authenticated = useSelector(selectAuthenticated);
 
   const dispatch = useDispatch();
@@ -54,10 +55,12 @@ export const Login = () => {
     await requestRegister(address, password)
       .then(async (data) => {
         console.log("REGISTER RESPONSE: ", data);
+        setSuccessMessage(
+          "Listo! Tu direccion esta registrada. Iniciaremos sesion por ti en unos segundos..."
+        );
       })
       .catch((err) => setErrorMessage(err.message));
-
-    await dispatchLogin();
+    setTimeout(await dispatchLogin, 2000);
   };
 
   const registerEvent = async (e) => {
@@ -102,6 +105,7 @@ export const Login = () => {
             <h5>Recuérdame</h5>
           </div>
           {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+          {successMessage && <p className="successMessage">{successMessage}</p>}
           <div className="buttonContainer">
             <Button
               style="secondary"
