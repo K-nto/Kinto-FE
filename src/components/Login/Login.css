@@ -73,7 +73,13 @@ img.bg {
     border: 4px var(--redrange) solid;
   }
 .loginForm .errorMessage {
+    margin-top: 16px;
     color: var(--redrange);
+    font-weight: bolder;
+}
+.loginForm .successMessage {
+    margin-top: 16px;
+    color: var(--lime-darken);
     font-weight: bolder;
 }
 .buttonContainer {
