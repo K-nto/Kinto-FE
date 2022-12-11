@@ -59,7 +59,7 @@ export const requestLogin = async (address, privateKey, rememberMe = false) => {
   };
 };
 
-export const requestRegiter = async (address, privateKey) => {
+export const requestRegister = async (address, privateKey) => {
   const authHash = privateKey
     ? getAuthHash(address, privateKey)
     : getCookie(AUTH_HASH_COOKIE);
@@ -67,14 +67,18 @@ export const requestRegiter = async (address, privateKey) => {
   console.log(address);
   console.log(privateKey);
   const userInfo = await axios
-    .post(`${KINTO_SERVICE_URL}/${USERS_ROUTE}`, {
-      address: address, 
-      secret: privateKey
-    }, {
-      headers: {
-        authorization: authHash,
+    .post(
+      `${KINTO_SERVICE_URL}/${USERS_ROUTE}`,
+      {
+        address: address,
+        secret: privateKey,
       },
-    })
+      {
+        headers: {
+          authorization: authHash,
+        },
+      }
+    )
     .then((response) => {
       return response.data;
     })
@@ -82,7 +86,7 @@ export const requestRegiter = async (address, privateKey) => {
       console.log(error);
       // throw new Error("Dirección o contraseña incorrectas");
     });
-    
+
   return {
     ...userInfo,
     address,

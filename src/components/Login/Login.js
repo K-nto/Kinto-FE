@@ -7,7 +7,7 @@ import { selectAuthenticated } from "../../store/app/app.selector";
 import { USER_LOG_IN } from "../../store/user/user.actions";
 import Button from "../common/Buttons/Button";
 import "./Login.css";
-import { requestLogin, requestRegiter } from "./Login.utils";
+import { requestLogin, requestRegister } from "./Login.utils";
 import loginBg from "../../../resources/login.png";
 
 export const Login = () => {
@@ -20,7 +20,7 @@ export const Login = () => {
   const dispatch = useDispatch();
 
   const dispatchLogin = async () => {
-    console.log("DISPATCH LOGIN")
+    console.log("DISPATCH LOGIN");
     await requestLogin(address, password, rememberMe)
       .then((addressInfo) => {
         dispatch({ type: USER_LOG_IN, payload: addressInfo });
@@ -51,12 +51,13 @@ export const Login = () => {
   };
 
   const dispatchRegister = async () => {
-    await requestRegiter(address, password)
+    await requestRegister(address, password)
       .then(async (data) => {
-        console.log("REGISTER RESPONSE: ", data)
-        await dispatchLogin()
+        console.log("REGISTER RESPONSE: ", data);
       })
       .catch((err) => setErrorMessage(err.message));
+
+    await dispatchLogin();
   };
 
   const registerEvent = async (e) => {
@@ -68,7 +69,7 @@ export const Login = () => {
     }
 
     await dispatchRegister();
-  }
+  };
 
   return (
     <div className="loginContent">
@@ -102,7 +103,11 @@ export const Login = () => {
           </div>
           {errorMessage && <p className="errorMessage">{errorMessage}</p>}
           <div className="buttonContainer">
-            <Button style="secondary" label="Registrate" onClick={registerEvent}></Button>
+            <Button
+              style="secondary"
+              label="Registrate"
+              onClick={registerEvent}
+            ></Button>
             <Button
               style="primary"
               label="Inicia sesión"
